@@ -33,7 +33,11 @@ First, you will need to train a bot using your Facebook or Skype data (you can s
 
 #### Getting Facebook data
 
+On Facebook desktop, click the down arrow at the upper right corner of the screen and go to Settings -> General. Click the link that says "Download a copy of your Facebook data" and then click "Start my archive." It will take anywhere from a few minutes to a few hours for Facebook to compile your data. You should get an email and a notification when it is ready for download.
+
 #### Getting Skype data
+
+You will need Skype classic on desktop to download your Skype history. 
 
 #### Using char-rnn
 
