@@ -6,8 +6,10 @@ import re
 import subprocess
 import time
 import random
-import vocab_cleaner
 import argparse
+sys.path.insert(0, '../')
+import vocab_cleaner
+
 
 class FBMessage:
     def __init__(self, text, author_id):
