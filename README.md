@@ -89,7 +89,7 @@ I have provided a generic bot trained from a 50 MB conversational dataset, locat
 
 ...
 
-After training terminates, go to char-rnn/cv and copy the checkpoint with the lowest loss. The naming scheme for the files is lm_lstm_epoch<epoch>_<loss>.t7. You can delete the rest of the checkpoints as they take up a lot of space.
+After training terminates, go to char-rnn/cv and copy the checkpoint with the lowest loss. The loss is the number in the filename following the underscore. You can delete the rest of the checkpoints as they take up a lot of space.
 
 ##### "Loss is exploding!"
 
