@@ -133,7 +133,7 @@ You will be prompted for your Facebook username/email and password. When the pro
 
 ##### Thread blacklist:
 
-Are there some group chats you're in that won't welcome bot spam every time anyone says anything? To prevent inevitable social ostracisation, add the IDs of any serious-business group chats you're in to the thread_blacklist file. You can get the ID of any conversation by going to https://www.facebook.com/messages on desktop and opening the conversation. The format of the url is 
+Are there some group chats you're in that won't welcome bot spam every time anyone says anything? To prevent inevitable social ostracisation, add the IDs of any serious-business group chats you're in to neural-chatbot/blacklist/thread_blacklist. You can get the ID of any conversation by going to https://www.facebook.com/messages on desktop and opening the conversation. The format of the url is 
 
 https://www.facebook.com/messages/t/<thread_id>
 
@@ -142,6 +142,8 @@ https://www.facebook.com/messages/t/<thread_id>
 Unfortunately, even though neural chatbots are trained on your data, they will not necessarily inherit your discretion. So it might be a good idea to blacklist employers, parents, romantic interests, and anyone else you don't want to risk unleashing a predictive text duplicate of yourself upon.
 
 The user blacklist also comes in handy when there are multiple bots in a group chat. By blacklisting the IDs of all bots, you can prevent the bots from responding to each other and creating infinite spam.
+
+Put user IDs you want to blacklist in neural-chatbot/blacklist/user_blacklist.
 
 You can get the ID of any user by going to https://www.facebook.com/messages on desktop and opening your conversation with them. The format of the url will be
 
