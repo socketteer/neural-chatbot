@@ -59,11 +59,11 @@ Run the skype_parser.py script using:
 $ python skype_parser.py <skype_username> <csv_file>
 ```
 
-Running the above command will generate a text file in botfood-parser/corpus called facebook-<skype_username>.txt. This prepared botfood. Follow the instructions under "Training with char-rnn" to train a bot using your data!
+Running the above command will generate a text file in botfood-parser/corpus called skype-<skype_username>.txt. This prepared botfood. Follow the instructions under "Training with char-rnn" to train a bot using your data!
 
 ### Training with char-rnn
 
-Compile all the data you want to feed the bot in a single file and name it input.txt (it is totally fine to combine parsed Facebook and Skype data). Create a new folder in neural-chatbot/char-rnn/data and copy input.txt into the folder.
+Compile all the data you want to feed the bot in a single file and name it input.txt (it is fine to combine parsed Facebook and Skype data). Create a new folder in neural-chatbot/char-rnn/data and copy input.txt into the folder.
 
 #### Method 1 -- training from scratch
 
