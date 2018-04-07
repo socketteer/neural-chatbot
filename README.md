@@ -75,7 +75,7 @@ $ th train.lua -data_dir data/<new folder name>
 
 You can play around with flags such a -rnn_size (defaults to 128; if you have more than a couple MB of data I would recommend a size of 300 or more), -num_layers (defaults to 2; you can try 3 or more) and dropout (try 0.5).
 
-If you are running on CPU, training will take at least a few hours. After training terminates, go to char-rnn/cv and copy the checkpoint with the lowest loss. The naming scheme for the files is lm_lstm_epoch<epoch>_<loss>.t7. You can delete the rest of the checkpoints as they take up a lot of space.
+If you are running on CPU, training will take at least a few hours. After training terminates, go to char-rnn/cv and copy the checkpoint with the lowest loss to neural-chatbot/saved_policies. The naming scheme for the files is lm_lstm_epoch<epoch>_<loss>.t7. You can delete the rest of the checkpoints as they take up a lot of space.
 
 ##### "Loss is exploding!"
 
@@ -85,16 +85,68 @@ Do you have a relatively small dataset (< 2 MB?) Try the train from generic chec
 
 If you have a small amount of data, there may not be enough material for the bot to develop internal representations of English syntax without becoming overfitted. A more suitable method for small datasets is training a generic bot on a large dataset first, and then initiating a second network with the same weights and training on the small dataset. This way, the bot can retain the representations it developed from the large dataset while honing to behave more like the small dataset.
 
-I have provided a generic bot trained from a 50 MB conversational dataset, located at neural-chatbot/saved_policies/generic.t7 and a script to automate the training process. Run the script like:
+I have provided a generic bot trained from a 50 MB conversational dataset, located at neural-chatbot/saved_policies/generic.t7 and a bash script to automate the training process. Run the script like:
 
-...
+```bash
+$ chmod +x train-from-checkpoint.sh
+$ ./train-from-checkpoint.sh <new folder name>
+```
 
-After training terminates, go to char-rnn/cv and copy the checkpoint with the lowest loss. The loss is the number in the filename following the underscore. You can delete the rest of the checkpoints as they take up a lot of space.
+After training terminates, go to char-rnn/cv and copy the checkpoint with the lowest loss neural-chatbot/saved_policies. The loss is the number in the filename following the underscore. You can delete the rest of the checkpoints as they take up a lot of space.
 
 ##### "Loss is exploding!"
 
-Try altering the training rate. Often, lowering it (for example ...) helps with preventing loss explosion, although sometimes making it higher can solve the problem as well. 
+Try altering the training rate. Often, lowering it helps with preventing loss explosion, although sometimes making it higher can solve the problem as well. 
 
 Note: The train from checkpoint method is a lot faster than training from scratch, and it's pretty normal for training to terminate with loss exploding. As long as the best checkpoint loss score is under 1.3 or so, the policy should be decent.
 
 ### Running bots on messenger
+
+Once you've copied your .t7 file to neural-chatbot/saved_policies, you are ready to put your bot online! (I would suggest renaming the .t7 file to something meaningful, especially if you are going to train multiple bots)
+
+Run the autoresponder script:
+
+```bash
+$ python autoresponder.py <.t7 file name> --delay
+```
+
+For example, to use the generic bot:
+
+```bash
+$ python autoresponder.py generic.t7 --delay
+``` 
+You will be prompted for your Facebook username/email and password. When the prompt displays "Listening...", the chatbot is online!
+
+##### Optional arguments:
+
+--verbose: enables verbose logging during chatbot operatio
+
+--maxlength [int]: maximum character length of generated responses
+
+--maxmessages [int]: maximum number of generated messages per incoming message
+
+--threadlength [int]: maximum number of messages from each thread saved in in memory
+
+--delay: insert realistic delay before sending messages. (recommended)
+
+#### Blacklists
+
+##### Thread blacklist:
+
+Are there some group chats you're in that won't welcome bot spam every time anyone says anything? To prevent inevitable social ostracisation, add the IDs of any serious-business group chats you're in to the thread_blacklist file. You can get the ID of any conversation by going to https://www.facebook.com/messages on desktop and opening the conversation. The format of the url is 
+
+https://www.facebook.com/messages/t/<thread_id>
+
+##### User blacklist:
+
+Unfortunately, even though neural chatbots are trained on your data, they will not necessarily inherit your discretion. So it might be a good idea to blacklist employers, parents, romantic interests, and anyone else you don't want to risk unleashing a predictive text duplicate of yourself upon.
+
+The user blacklist also comes in handy when there are multiple bots in a group chat. By blacklisting the IDs of all bots, you can prevent the bots from responding to each other and creating infinite spam.
+
+You can get the ID of any user by going to https://www.facebook.com/messages on desktop and opening your conversation with them. The format of the url will be
+
+https://www.facebook.com/messages/t/<user_id>
+
+If you want to blacklist someone but don't have a conversation with them, go to their page, right click on their profile picture and select "copy link location." The format of the link you will have copied will be 
+
+https://www.facebook.com/profile/picture/view/?profile_id=<user_id>.
