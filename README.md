@@ -119,7 +119,7 @@ You will be prompted for your Facebook username/email and password. When the pro
 
 ##### Optional arguments:
 
---verbose: enables verbose logging during chatbot operatio
+--verbose: enables verbose logging during chatbot operation
 
 --maxlength [int]: maximum character length of generated responses
 
