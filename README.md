@@ -29,7 +29,7 @@ $ pip install fbchat
 
 ### Preprocessing data
 
-First, you will need to train a bot using your Facebook or Skype data (you can skip this section if you want to use the generic pre-trained bot). For this, you will need [botfood-parser](https://github.com/socketeer/botfood-parser). You do not need to clone it inside the neural-chatbot directory.
+First, you will need to train a bot using your Facebook or Skype data (you can skip this section if you want to use the generic pre-trained bot). For this, you will need [botfood-parser](https://github.com/socketteer/botfood-parser). You do not need to clone it inside the neural-chatbot directory.
 
 #### Getting Facebook data
 
